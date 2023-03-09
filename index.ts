@@ -1,12 +1,17 @@
 import { createServer } from 'http';
 
-class urApp {
-    constructor() {
-        console.log("New server created")
+class ultraRouting {
+
+    get(path: string, ) {
+
     }
 
-    listen(port: number) {
-        
+    post(path: string) {
+
+    }
+
+    handleRequest(req: any, res: any) {
+
     }
 
 }
