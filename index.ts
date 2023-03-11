@@ -1,6 +1,7 @@
 import { createServer, IncomingMessage, ServerResponse } from 'http';
+import Response from './util/Response'
 
-type handlers = (req: any, res: any, next?: Function) => any
+type handlers = (req: any, res: Response, next?: Function) => any
 
 interface urls {
     path: string;
@@ -18,6 +19,7 @@ class ultraRouting {
     }
 
     private handleRequest(req: IncomingMessage, res: ServerResponse) {
+        Object.setPrototypeOf(res, Response.prototype);
 
         this.urls.forEach(url => {
             if (req.url == url.path && req.method?.toLowerCase() == url.method) {
@@ -28,10 +30,10 @@ class ultraRouting {
                 const next = () => {
                     i++
                     if (i < handlers.length) {
-                        handlers[i](req, res, next)
+                        handlers[i](req, res as Response, next)
                     }
                 }
-                handlers[0](req, res, next)
+                handlers[0](req, res as Response, next)
             }
         })
     }
