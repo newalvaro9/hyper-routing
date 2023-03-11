@@ -11,6 +11,9 @@ import { createServer } from 'http';
     }
 
 
+    listen(port: number, callback: () => any) {
+        this.server.listen(port);
+        if (callback) callback()
     }
 }
 
