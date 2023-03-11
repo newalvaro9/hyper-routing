@@ -1,4 +1,5 @@
 import { createServer, IncomingMessage, ServerResponse } from 'http';
+import qs from 'querystring'
 import Response from './util/Response'
 import Request from './util/Request'
 
@@ -62,6 +63,32 @@ class ultraRouting {
     listen(port: number, callback: () => any) {
         this.server.listen(port);
         if (callback) callback()
+    }
+
+    // Middlewares
+
+    bodyparser(req: Request, res: Response, next: Function) {
+
+        if (req.headers['content-type'] === 'application/x-www-form-urlencoded') {
+
+            req.on('data', (chunk) => {
+                const jsonString = chunk.toString();
+                const object = qs.parse(jsonString)
+                req.body = Object.assign({}, object)
+                next();
+            })
+
+        } else if (req.headers['content-type'] === 'application/json') {
+
+            req.on('data', (chunk) => {
+                const jsonString = chunk.toString();
+                req.body = JSON.parse(jsonString);
+                next();
+            })
+
+        } else {
+            next();
+        }
     }
 }
 
