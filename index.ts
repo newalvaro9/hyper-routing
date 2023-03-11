@@ -1,5 +1,6 @@
 import { createServer, IncomingMessage, ServerResponse } from 'http';
 import Response from './util/Response'
+import Request from './util/Request'
 
 type handlers = (req: any, res: Response, next?: Function) => any
 
@@ -30,10 +31,10 @@ class ultraRouting {
                 const next = () => {
                     i++
                     if (i < handlers.length) {
-                        handlers[i](req, res as Response, next)
+                        handlers[i](req as Request, res as Response, next)
                     }
                 }
-                handlers[0](req, res as Response, next)
+                handlers[0](req as Request, res as Response, next)
             }
         })
     }
