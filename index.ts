@@ -7,7 +7,8 @@ type handlers = (req: any, res: Response, next?: Function) => any
 interface urls {
     path: string;
     method: string;
-    handlers: Array<Function>
+    handlers: Array<Function>;
+    middleware?: boolean;
 }
 
 class ultraRouting {
@@ -39,11 +40,22 @@ class ultraRouting {
         })
     }
 
+    use(middleware: handlers) {
+        this.urls.push({ path: "*", method: "*", handlers: [middleware], middleware: true });
+    }
+
     get(path: string, ...handlers: Array<handlers>) {
+        if (this.urls[0].middleware) {
+            return this.urls.push({ path: path, method: "get", handlers: this.urls[0].handlers.concat(handlers) })
+        }
         this.urls.push({ path: path, method: "get", handlers: handlers })
     }
 
     post(path: string, ...handlers: Array<handlers>) {
+        if (this.urls[0].middleware) {
+            return this.urls.push({ path: path, method: "post", handlers: this.urls[0].handlers.concat(handlers) })
+
+        }
         this.urls.push({ path: path, method: "post", handlers: handlers })
     }
 
