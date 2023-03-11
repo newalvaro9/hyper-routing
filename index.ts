@@ -1,17 +1,16 @@
 import { createServer } from 'http';
 
-class ultraRouting {
 
-    get(path: string, ) {
+
+    server: any
+
+    constructor() {
+        this.server = createServer(this.handleRequest.bind(this))
+    }
 
     }
 
-    post(path: string) {
 
     }
-
-    handleRequest(req: any, res: any) {
-
-    }
-
 }
+
