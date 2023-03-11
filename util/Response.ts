@@ -19,6 +19,15 @@ class Response extends ServerResponse {
         return this.end(json)
     }
 
+    send(data: string) {
+        this.writeHead(200, {
+            'Content-Type': 'text/plain',
+            'Content-Length': Buffer.byteLength(data)
+        });
+        this.write(data)
+        return this
+    }
+
     sendFile(path: string) {
         if (!require.main?.path) throw new Error
         this.writeHead(200, { 'Content-Type': 'text/html' });
