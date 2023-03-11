@@ -42,6 +42,10 @@ class ultraRouting {
         this.urls.push({ path: path, method: "get", handlers: handlers })
     }
 
+    post(path: string, ...handlers: Array<handlers>) {
+        this.urls.push({ path: path, method: "post", handlers: handlers })
+    }
+
     listen(port: number, callback: () => any) {
         this.server.listen(port);
         if (callback) callback()
