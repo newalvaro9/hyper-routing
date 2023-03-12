@@ -1,12 +1,26 @@
 import { ServerResponse } from "http";
 import { createReadStream, existsSync, statSync } from "fs";
 import { join } from "path";
+import httpcodes from './data/httpcodes.json';
 import ErrorUR from "./ErrorUR";
 
 class Response extends ServerResponse {
 
-    status(code: number) {
-        this.statusCode = code
+    private getCode(code: string): number {
+        for (const [codeNumber, value] of Object.entries(httpcodes)) {
+            if (value === code) {
+                return Number(codeNumber);
+            }
+        }
+        throw new ErrorUR("Invalid Status Code", `${code} is not a valid status string code. Check https://developer.mozilla.org/en-US/docs/Web/HTTP/Status`)
+    }
+
+    status(code: number | string) {
+        if (typeof code === 'string') {
+            this.statusCode = this.getCode(code)
+        } else {
+            this.statusCode = code
+        }
         return this
     }
 
