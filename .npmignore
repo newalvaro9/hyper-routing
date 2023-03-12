@@ -1,0 +1,11 @@
+# pre-build
+index.ts
+/util
+
+
+# config and node
+/node_modules
+package-lock.json
+tsconfig.json
+.gitattributes
+.gitignore
