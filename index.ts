@@ -3,7 +3,7 @@ import qs from 'querystring'
 import Response from './util/Response'
 import Request from './util/Request'
 
-type handlers = (req: any, res: Response, next?: Function) => any
+type handlers = (req: Request, res: Response, next?: Function) => any
 
 interface urls {
     path: string;
