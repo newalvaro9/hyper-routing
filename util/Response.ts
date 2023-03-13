@@ -1,6 +1,7 @@
-import { ServerResponse } from "http";
-import { createReadStream, existsSync, statSync } from "fs";
-import { join } from "path";
+import { ServerResponse } from "node:http";
+import { createReadStream, existsSync, statSync } from "node:fs";
+import { join } from "node:path";
+
 import httpcodes from './data/httpcodes.json';
 import ErrorUR from "./ErrorUR";
 

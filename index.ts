@@ -1,5 +1,6 @@
-import { createServer, IncomingMessage, ServerResponse } from 'http';
-import qs from 'querystring'
+import { createServer, IncomingMessage, ServerResponse } from 'node:http';
+import { parse } from 'node:querystring'
+
 import Response from './util/Response'
 import Request from './util/Request'
 
@@ -73,7 +74,7 @@ class ultraRouting {
 
             req.on('data', (chunk) => {
                 const jsonString = chunk.toString();
-                const object = qs.parse(jsonString)
+                const object = parse(jsonString)
                 req.body = Object.assign({}, object)
                 next();
             })
