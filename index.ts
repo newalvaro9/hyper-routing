@@ -13,8 +13,8 @@ interface urls {
 }
 
 class ultraRouting {
-    server: any
-    urls: Array<urls>
+    private server: any
+    private urls: Array<urls>
 
     constructor() {
         this.urls = []
