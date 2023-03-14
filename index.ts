@@ -68,19 +68,23 @@ class ultraRouting {
 
     // Middlewares
 
-    bodyparser({ json, urlencoded }: { json?: boolean; urlencoded?: boolean }) {
-
+    bodyparser(options: { json: boolean; urlencoded: boolean }) {
         return (req: Request, res: Response, next: Function) => {
-            if (req.headers['content-type'] === 'application/x-www-form-urlencoded' && urlencoded) {
+
+            if (!options || Object.keys(options).length === 0) {
+                options = { json: true, urlencoded: true}
+            }
+
+            if (req.headers['content-type'] === 'application/x-www-form-urlencoded' && options.urlencoded) {
 
                 req.on('data', (chunk) => {
                     const jsonString = chunk.toString();
                     const object = parse(jsonString)
-                    req.body = Object.assign({}, object)
+                    req.body = object
                     next();
                 })
 
-            } else if (req.headers['content-type'] === 'application/json' && json) {
+            } else if (req.headers['content-type'] === 'application/json' && options.json) {
 
                 req.on('data', (chunk) => {
                     const jsonString = chunk.toString();
