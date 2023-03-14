@@ -3,7 +3,6 @@ import { parse } from 'node:querystring'
 
 import Response from './util/Response'
 import Request from './util/Request'
-import ErrorUR from './util/ErrorUR';
 
 type handlers = (req: Request, res: Response, next?: Function) => any
 
