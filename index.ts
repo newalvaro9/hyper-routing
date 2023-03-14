@@ -3,6 +3,7 @@ import { parse } from 'node:querystring'
 
 import Response from './util/Response'
 import Request from './util/Request'
+import ErrorUR from './util/ErrorUR';
 
 type handlers = (req: Request, res: Response, next?: Function) => any
 
@@ -68,27 +69,29 @@ class ultraRouting {
 
     // Middlewares
 
-    bodyparser(req: Request, res: Response, next: Function) {
+    bodyparser({ json, urlencoded }: { json?: boolean; urlencoded?: boolean }) {
 
-        if (req.headers['content-type'] === 'application/x-www-form-urlencoded') {
+        return (req: Request, res: Response, next: Function) => {
+            if (req.headers['content-type'] === 'application/x-www-form-urlencoded' && urlencoded) {
 
-            req.on('data', (chunk) => {
-                const jsonString = chunk.toString();
-                const object = parse(jsonString)
-                req.body = Object.assign({}, object)
+                req.on('data', (chunk) => {
+                    const jsonString = chunk.toString();
+                    const object = parse(jsonString)
+                    req.body = Object.assign({}, object)
+                    next();
+                })
+
+            } else if (req.headers['content-type'] === 'application/json' && json) {
+
+                req.on('data', (chunk) => {
+                    const jsonString = chunk.toString();
+                    req.body = JSON.parse(jsonString);
+                    next();
+                })
+
+            } else {
                 next();
-            })
-
-        } else if (req.headers['content-type'] === 'application/json') {
-
-            req.on('data', (chunk) => {
-                const jsonString = chunk.toString();
-                req.body = JSON.parse(jsonString);
-                next();
-            })
-
-        } else {
-            next();
+            }
         }
     }
 }
