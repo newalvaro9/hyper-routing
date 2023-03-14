@@ -56,7 +56,6 @@ class ultraRouting {
     post(path: string, ...handlers: Array<handlers>) {
         if (this.urls[0]?.middleware) {
             return this.urls.push({ path: path, method: "post", handlers: this.urls[0].handlers.concat(handlers) })
-
         }
         this.urls.push({ path: path, method: "post", handlers: handlers })
     }
@@ -72,7 +71,7 @@ class ultraRouting {
         return (req: Request, res: Response, next: Function) => {
 
             if (!options || Object.keys(options).length === 0) {
-                options = { json: true, urlencoded: true}
+                options = { json: true, urlencoded: true }
             }
 
             if (req.headers['content-type'] === 'application/x-www-form-urlencoded' && options.urlencoded) {
