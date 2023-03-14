@@ -47,14 +47,14 @@ class ultraRouting {
     }
 
     get(path: string, ...handlers: Array<handlers>) {
-        if (this.urls[0].middleware) {
+        if (this.urls[0]?.middleware) {
             return this.urls.push({ path: path, method: "get", handlers: this.urls[0].handlers.concat(handlers) })
         }
         this.urls.push({ path: path, method: "get", handlers: handlers })
     }
 
     post(path: string, ...handlers: Array<handlers>) {
-        if (this.urls[0].middleware) {
+        if (this.urls[0]?.middleware) {
             return this.urls.push({ path: path, method: "post", handlers: this.urls[0].handlers.concat(handlers) })
 
         }
