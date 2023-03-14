@@ -34,12 +34,17 @@ class Response extends ServerResponse {
         return this.end(json)
     }
 
-    send(data: string) {
-        this.writeHead(200, {
-            'Content-Type': 'text/plain',
-            'Content-Length': Buffer.byteLength(data)
-        });
-        this.write(data)
+    send(data: any) {
+        if (typeof data === 'object') {
+            this.json(data)
+        } else {
+            data = data.toString()
+            this.writeHead(200, {
+                'Content-Type': 'text/plain',
+                'Content-Length': Buffer.byteLength(data)
+            });
+            this.write(data)
+        }
         return this
     }
 
