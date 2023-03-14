@@ -5,7 +5,7 @@ const users = new ultraJDB("users")
 const app = new ultrarouting()
 
 
-app.use(app.bodyparser)
+app.use(app.bodyparser())
 
 app.get('/', (req, res) => {
     res.sendFile('index.html')
@@ -23,7 +23,6 @@ app.post('/login', (req, res) => {
         res.send(`Logged in as ${username}`)
     }
     res.send("Incorrect password")
-
 })
 
 
