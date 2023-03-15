@@ -36,52 +36,56 @@ class ultraRouting {
                     if (i < handlers.length) {
                         handlers[i](req as Request, res as Response, next)
                     }
+                    handlers[0](req as Request, res as Response, next)
                 }
-                handlers[0](req as Request, res as Response, next)
             }
         })
     }
 
+    private newUrl(urlObj: urls) {
+        this.urls.push(urlObj);
+    }
+
     use(middleware: handlers) {
-        this.urls.push({ path: "*", method: "*", handlers: [middleware], middleware: true });
+        this.newUrl({ path: "*", method: "*", handlers: [middleware], middleware: true });
     }
 
     get(path: string, ...handlers: Array<handlers>) {
         if (this.urls[0]?.middleware) {
-            return this.urls.push({ path: path, method: "get", handlers: this.urls[0].handlers.concat(handlers) })
+            return this.newUrl({ path: path, method: "get", handlers: this.urls[0].handlers.concat(handlers) })
         }
-        this.urls.push({ path: path, method: "get", handlers: handlers })
+        this.newUrl({ path: path, method: "get", handlers: handlers })
     }
 
     post(path: string, ...handlers: Array<handlers>) {
         if (this.urls[0]?.middleware) {
-            return this.urls.push({ path: path, method: "post", handlers: this.urls[0].handlers.concat(handlers) })
+            return this.newUrl({ path: path, method: "post", handlers: this.urls[0].handlers.concat(handlers) })
         }
-        this.urls.push({ path: path, method: "post", handlers: handlers })
+        this.newUrl({ path: path, method: "post", handlers: handlers })
     }
 
     delete(path: string, ...handlers: Array<handlers>) {
         if (this.urls[0]?.middleware) {
-            return this.urls.push({ path: path, method: "delete", handlers: this.urls[0].handlers.concat(handlers) })
+            return this.newUrl({ path: path, method: "delete", handlers: this.urls[0].handlers.concat(handlers) })
 
         }
-        this.urls.push({ path: path, method: "delete", handlers: handlers })
+        this.newUrl({ path: path, method: "delete", handlers: handlers })
     }
 
     put(path: string, ...handlers: Array<handlers>) {
         if (this.urls[0]?.middleware) {
-            return this.urls.push({ path: path, method: "put", handlers: this.urls[0].handlers.concat(handlers) })
+            return this.newUrl({ path: path, method: "put", handlers: this.urls[0].handlers.concat(handlers) })
 
         }
-        this.urls.push({ path: path, method: "put", handlers: handlers })
+        this.newUrl({ path: path, method: "put", handlers: handlers })
     }
 
     patch(path: string, ...handlers: Array<handlers>) {
         if (this.urls[0]?.middleware) {
-            return this.urls.push({ path: path, method: "patch", handlers: this.urls[0].handlers.concat(handlers) })
+            return this.newUrl({ path: path, method: "patch", handlers: this.urls[0].handlers.concat(handlers) })
 
         }
-        this.urls.push({ path: path, method: "patch", handlers: handlers })
+        this.newUrl({ path: path, method: "patch", handlers: handlers })
     }
 
     listen(port: number, callback: () => any) {
