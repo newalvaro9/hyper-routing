@@ -26,18 +26,40 @@ class ultraRouting {
         Object.setPrototypeOf(res, Response.prototype);
 
         this.urls.forEach(url => {
-            if (req.url == url.path && req.method?.toLowerCase() == url.method) {
-                console.log(url)
-                // Call each handler in sequence, passing in the req, res, and next functions
-                const handlers = url.handlers || []
-                let i = 0
-                const next = () => {
-                    i++
-                    if (i < handlers.length) {
-                        handlers[i](req as Request, res as Response, next)
+            const arrayURL: Array<string> = req.url?.split('/') as string[]
+            const arrayPATH: Array<string> = url.path.split('/')
+
+            if (req.method?.toLowerCase() == url.method) {
+                let match = true;
+                let params: { [key: string]: string } = {};
+                // Iterate over each segment of the URL path and compare with the request path
+                for (let i = 0; i < arrayPATH.length; i++) {
+                    if (arrayPATH[i].startsWith(':')) {
+                        // If the segment is a dynamic parameter, save the parameter value to the params object
+                        const paramName = arrayPATH[i].substring(1);
+                        params[paramName] = arrayURL[i];
+                    } else if (arrayPATH[i] !== arrayURL[i]) {
+                        // If the segment does not match, set match to false and break the loop
+                        match = false;
+                        break;
                     }
                 }
-                handlers[0](req as Request, res as Response, next)
+
+                if (match) {
+                    console.log("Match\n", url);
+
+                    (req as Request).params = params;
+
+                    const handlers = url.handlers || []
+                    let i = 0
+                    const next = () => {
+                        i++
+                        if (i < handlers.length) {
+                            handlers[i](req as Request, res as Response, next)
+                        }
+                    }
+                    handlers[0](req as Request, res as Response, next)
+                }
             }
         })
     }
