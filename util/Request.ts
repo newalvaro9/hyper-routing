@@ -1,6 +1,6 @@
 import { IncomingMessage } from "node:http";
 
 export default class Request extends IncomingMessage {
-    body: any;
-    params: any;
+    body: Object = {};
+    params: { [key: string]: string } = {};
 }
