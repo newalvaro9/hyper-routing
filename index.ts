@@ -53,7 +53,7 @@ class ultraRouting {
     }
 
     use(middleware: handlers) {
-        this.newUrl({ path: "*", method: "*", handlers: [middleware], middleware: true });
+        this.newUrl({ path: "?", method: "?", handlers: [middleware], middleware: true });
     }
 
     get(path: string, ...handlers: Array<handlers>) {
