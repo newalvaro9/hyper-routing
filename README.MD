@@ -46,7 +46,7 @@ const app = new ultraRouting()
 Application instance
 --------
 
-### \<method>(path, ...callbacks ...)
+### \<method>(path, ...callbacks)
 <style>
     tr { background-color: #161b22!important }
 </style>
