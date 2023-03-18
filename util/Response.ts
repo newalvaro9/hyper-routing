@@ -49,10 +49,9 @@ class Response extends ServerResponse {
     }
 
     sendFile(path: string) {
-        if (!require.main?.path) throw new Error
-        this.writeHead(200, { 'Content-Type': 'text/html' });
-        const finPath = join(require.main.path, 'views', path)
-        console.log(finPath)
+        if (!require.main?.path) throw new ErrorUR("File not found", `Cannot find \`views\` folder or \`${path}\` file`)
+
+        const finPath = join(process.cwd(), 'views', path)
         if (!existsSync(finPath)) throw new ErrorUR("File not found", `Cannot find \`views\` folder or \`${path}\` file`)
 
         this.writeHead(200, { 'Content-Type': 'text/html' });
