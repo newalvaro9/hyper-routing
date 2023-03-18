@@ -28,12 +28,16 @@ class ultraRouting {
 
         this.urls.forEach(url => {
             const parser = new pathToRegex(url.path)
-            const match = parser.match(req.url)
+            const match = parser.match(req.url === '/' ? req.url : req.url?.split('?')[0])
 
             if (match && req.method?.toLowerCase() == url.method) {
-                console.log(url);
 
+                const queryurl = new URL(req.url as string, `http://${req.headers.host}`);
+                const searchParams = queryurl.searchParams;
+                const paramsObj = Object.fromEntries(searchParams.entries());
+                
                 (req as Request).params = match;
+                (req as Request).query = paramsObj;
 
                 const handlers = url.handlers || []
                 let i = 0
