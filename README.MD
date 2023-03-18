@@ -23,6 +23,7 @@ Table of contents
 * [Request](#request)
     * [body](#body)
     * [params](#params)
+    * [query](#query)
 * [Response](#response)
     * [status](#statuscode)
     * [json](#jsondata)
@@ -174,7 +175,7 @@ Attribute of the Request class containing the `<input/>` values of the `<form/>`
 </form>
 ```
 
-```json
+```js
 {
     username: "someusername",
     password: "somepassword"
@@ -193,9 +194,39 @@ Attribute of the Request class with the specified parameters in the path.
 
 ```js
 // http://localhost:3000/users/12345
+{
+    id: "123458"
+}
+```
+
+```js
+// http://localhost:3000/users/12345
 app.get('/users/:id', (req, res) => {
     const { id } = req.params;
-    console.log(id) // Logs 123458
+    console.log(id); // Logs 123458
+});
+```
+
+### query
+
+Attribute of the Request class with the query parameters in the url.
+
+```js
+// http://localhost:3000/products?category=clothes&design=fancy&sort=recent
+{
+    category: "clothes",
+    design: "fancy",
+    sort: "recent"
+}
+```
+
+```js
+// http://localhost:3000/products?category=clothes&design=fancy&sort=recent
+app.get('/products', (req, res) => {
+    const { category, design, sort } = req.query;
+    console.log(category); // Logs clothes
+    console.log(design); // Logs fancy
+    console.log(sort); // Logs recent
 });
 ```
 
