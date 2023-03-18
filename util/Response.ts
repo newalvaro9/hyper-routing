@@ -58,6 +58,14 @@ class Response extends ServerResponse {
         createReadStream(finPath).pipe(this);
         return this
     }
+
+    redirect(url: string, code: number | string = 302) {
+        typeof code === 'string' ? this.statusCode = this.getCode(code) : this.statusCode = code;
+        this.writeHead(this.statusCode, {
+            "Location": url
+        })
+        return this
+    }
 }
 
 export = Response
