@@ -1,6 +1,6 @@
 {
   "name": "ultra-routing",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "An amazing and simple route manager",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
