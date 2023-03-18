@@ -328,6 +328,29 @@ app.get('/', (req, res) => {
 });
 ```
 
+### redirect(url)
+
+Redirects to the specified url.
+
+<table>
+    <tr style="background-color: #0d1117!important">
+        <th>Argument</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>url</td>
+        <td>A string representing the new url path.</td>
+    </tr>
+</table>
+
+```js
+app.get('/profile', (req, res) => {
+    if(!req.user) { // Using some type of auth
+        res.redirect('/login'); // Redirects the user to http://localhost:3000/login
+    };
+});
+```
+
 Help
 ------
 Have any doubts or suggestions?<br>
