@@ -47,9 +47,7 @@ Application instance
 --------
 
 ### \<method>(path, ...callbacks)
-<style>
-    tr { background-color: #161b22!important }
-</style>
+
 <table>
     <tr style="background-color: #0d1117!important">
         <th>Argument</th>
