@@ -1,12 +1,20 @@
 {
   "name": "ultra-routing",
   "version": "1.0.0",
-  "description": "",
+  "description": "An amazing and simple route manager",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
     "login": "node ./Examples/Simple_Login/app.js"
   },
+  "keys": [
+    "http",
+    "router",
+    "expressjs",
+    "clone",
+    "http-server",
+    "web-server"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/newalvaro9/ultra-routing.git"
