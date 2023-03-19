@@ -1,6 +1,6 @@
 import { ServerResponse } from "node:http";
 import { createReadStream, existsSync, statSync } from "node:fs";
-import { join } from "node:path";
+import { extname, join } from "node:path";
 
 import httpcodes from './data/httpcodes.json';
 import ErrorUR from "./ErrorUR";
@@ -54,7 +54,40 @@ class Response extends ServerResponse {
         const finPath = join(process.cwd(), 'views', path)
         if (!existsSync(finPath)) throw new ErrorUR("File not found", `Cannot find \`views\` folder or \`${path}\` file`)
 
-        this.writeHead(200, { 'Content-Type': 'text/html' });
+        const ext = extname(path);
+        let contentType: string = ''
+        switch (ext) {
+            case '.html':
+                contentType = 'text/html';
+                break;
+            /* Images */
+            case '.jpg':
+            case '.jpeg':
+            case '.jfif':
+            case '.pjpeg':
+            case '.pjp':
+                contentType = 'image/jpeg';
+                break;
+            case '.png':
+                contentType = 'image/png';
+                break;
+            case '.svg':
+                contentType = 'image/svg+xml';
+                break;
+            case '.webp':
+                contentType = 'image/webp';
+                break;
+            case '.gif':
+                contentType = 'image/gif';
+                break;
+            default:
+                throw new ErrorUR('Unsupported file type', `File type ${extname} is not supported.`)
+        }
+
+        this.writeHead(200, { 
+            'Content-Type': contentType,
+            'Content-Length': statSync(finPath).size 
+        });
         createReadStream(finPath).pipe(this);
         return this
     }
