@@ -29,6 +29,7 @@ Table of contents
     * [json](#jsondata)
     * [send](#senddata)
     * [sendFile](#sendfilepath)
+* [Examples](#examples)
 * [Help](#help)
 * [License](#license)
 
@@ -350,6 +351,11 @@ app.get('/profile', (req, res) => {
     };
 });
 ```
+
+Examples
+---------
+
+Check out the [examples](https://github.com/newalvaro9/ultra-routing/tree/main/Examples/) to see how you can use `ultra-routing` in a project.
 
 Help
 ------
