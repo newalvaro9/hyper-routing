@@ -5,7 +5,7 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "login": "node ./Examples/Simple_Login/app.js"
+    "login": "node ./Examples/Simple_Image_API/app.js"
   },
   "keys": [
     "http",
