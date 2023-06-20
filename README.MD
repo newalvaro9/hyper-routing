@@ -360,7 +360,7 @@ Check out the [examples](https://github.com/newalvaro9/ultra-routing/tree/main/E
 Help
 ------
 Have any doubts or suggestions?<br>
-Send me a private message on Discord: **Álvaro#9410**
+Send me a private message on Discord: **@newalvaro9**
 
 License
 --------
