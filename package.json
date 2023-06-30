@@ -1,6 +1,6 @@
 {
-  "name": "ultra-routing",
-  "version": "1.0.0",
+  "name": "hyper-routing",
+  "version": "0.0.1",
   "description": "An amazing and simple route manager",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -17,14 +17,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/newalvaro9/ultra-routing.git"
+    "url": "git+https://github.com/newalvaro9/hyper-routing.git"
   },
   "author": "Álvaro Poblador",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/newalvaro9/ultra-routing/issues"
+    "url": "https://github.com/newalvaro9/hyper-routing/issues"
   },
-  "homepage": "https://github.com/newalvaro9/ultra-routing#readme",
+  "homepage": "https://github.com/newalvaro9/hyper-routing#readme",
   "devDependencies": {
     "@types/node": "^18.14.5"
   },

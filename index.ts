@@ -14,7 +14,7 @@ interface urls {
     middleware?: boolean;
 }
 
-class ultraRouting {
+class hyperRouting {
     private server: any
     private urls: Array<urls>
 
@@ -136,4 +136,4 @@ class ultraRouting {
     }
 }
 
-export = ultraRouting
+export = hyperRouting;

@@ -1,14 +1,14 @@
-# Ultra-Routing
-![version](https://img.shields.io/npm/v/ultra-routing)
-![license](https://img.shields.io/npm/l/ultra-routing)
-![downloads](https://img.shields.io/npm/dt/ultra-routing)
+# Hyper-Routing
+![version](https://img.shields.io/npm/v/hyper-routing)
+![license](https://img.shields.io/npm/l/hyper-routing)
+![downloads](https://img.shields.io/npm/dt/hyper-routing)
 
 > An amazing and simple route manager
 
 Instalation
 -----------
 ```
-npm i ultra-routing
+npm i hyper-routing
 ```
 
 Table of contents
@@ -37,12 +37,12 @@ Usage
 -------
 ```js
 // Using Node.js `require()`
-const ultraRouting = require('ultra-routing');
+const hyperRouting = require('hyper-routing');
 
 // Using ES6 imports
-import ultraRouting from 'ultra-routing';
+import hyperRouting from 'hyper-routing';
 
-const app = new ultraRouting()
+const app = new hyperRouting()
 ```
 
 Application instance
@@ -355,7 +355,7 @@ app.get('/profile', (req, res) => {
 Examples
 ---------
 
-Check out the [examples](https://github.com/newalvaro9/ultra-routing/tree/main/Examples/) to see how you can use `ultra-routing` in a project.
+Check out the [examples](https://github.com/newalvaro9/hyper-routing/tree/main/Examples/) to see how you can use `hyper-routing` in a project.
 
 Help
 ------
@@ -365,7 +365,7 @@ Send me a private message on Discord: **@newalvaro9**
 License
 --------
 
-[MIT](https://github.com/newalvaro9/ultrajson-db/blob/main/LICENSE)
+[MIT](https://github.com/newalvaro9/hyper-routing/blob/main/LICENSE)
 
 Copyright 2023, Álvaro Poblador.<br>
 Inspired in express.js

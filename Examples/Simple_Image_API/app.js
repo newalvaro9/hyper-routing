@@ -1,6 +1,6 @@
-const ultrarouting = require('ultra-routing');
+const hyperRouting = require('hyper-routing');
 const { readdirSync } = require('fs');
-const app = new ultrarouting();
+const app = new hyperRouting();
 
 const PORT = 3000;
 

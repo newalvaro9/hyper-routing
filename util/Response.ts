@@ -3,7 +3,7 @@ import { createReadStream, existsSync, statSync } from "node:fs";
 import { extname, join } from "node:path";
 
 import httpcodes from './data/httpcodes.json';
-import ErrorUR from "./ErrorUR";
+import ErrorHR from "./ErrorHR";
 
 class Response extends ServerResponse {
 
@@ -13,7 +13,7 @@ class Response extends ServerResponse {
                 return Number(codeNumber);
             }
         }
-        throw new ErrorUR("Invalid Status Code", `${code} is not a valid status string code. Check https://developer.mozilla.org/en-US/docs/Web/HTTP/Status`)
+        throw new ErrorHR("Invalid Status Code", `${code} is not a valid status string code. Check https://developer.mozilla.org/en-US/docs/Web/HTTP/Status`)
     }
 
     status(code: number | string) {
@@ -49,10 +49,10 @@ class Response extends ServerResponse {
     }
 
     sendFile(path: string) {
-        if (!require.main?.path) throw new ErrorUR("File not found", `Cannot find \`views\` folder or \`${path}\` file`)
+        if (!require.main?.path) throw new ErrorHR("File not found", `Cannot find \`views\` folder or \`${path}\` file`)
 
         const finPath = join(process.cwd(), 'views', path)
-        if (!existsSync(finPath)) throw new ErrorUR("File not found", `Cannot find \`views\` folder or \`${path}\` file`)
+        if (!existsSync(finPath)) throw new ErrorHR("File not found", `Cannot find \`views\` folder or \`${path}\` file`)
 
         const ext = extname(path);
         let contentType: string = ''
@@ -81,7 +81,7 @@ class Response extends ServerResponse {
                 contentType = 'image/gif';
                 break;
             default:
-                throw new ErrorUR('Unsupported file type', `File type ${extname} is not supported.`)
+                throw new ErrorHR('Unsupported file type', `File type ${extname} is not supported.`)
         }
 
         this.writeHead(200, { 
